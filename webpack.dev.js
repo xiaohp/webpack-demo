@@ -10,13 +10,15 @@ module.exports = merge(common, {
         hot: true,
     },
     module: {
-        rules: [{
-            test: /\.css$/,
-            use: [
-                'style-loader',
-                'css-loader'
-            ]
-        }]
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
+            },
+        ]
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
