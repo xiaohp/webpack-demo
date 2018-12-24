@@ -1,16 +1,17 @@
-import _ from 'lodash'
 import printMe from './print.js'
 import './styles.css'
 
-if (process.env.NODE_ENV !== 'production') {
-    console.log('Looks like we are in development mode!')
+const debug = function() {
+    if (process.env.NODE_ENV !== 'production') {
+        console.log('Looks like we are in development mode!')
+    }
 }
 
-function component() {
+const component = function() {
     let element = document.createElement('div')
     var btn = document.createElement('button')
 
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ')
+    element.innerHTML = ['Hello', 'webpack'].join(' ')
 
     btn.innerHTML = 'Click me and check the console'
     btn.onclick = printMe
@@ -20,14 +21,14 @@ function component() {
     return element
 }
 
-let element = component(); // Store the element to re-render on print.js changes
-document.body.appendChild(element);
-
-if (module.hot) {
-    module.hot.accept('./print.js', function() {
-        console.log('Accepting the updated printMe module!')
-        document.body.removeChild(element);
-        element = component(); // Re-render the "component" to update the click handler
-        document.body.appendChild(element);
-    })
+const addComponent = function() {
+    let element = component()
+    document.body.appendChild(element)
 }
+
+const __main = function() {
+    debug()
+    addComponent()
+}
+
+__main()
